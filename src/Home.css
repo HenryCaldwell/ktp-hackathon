@@ -1,0 +1,126 @@
+:root {
+  --border: #1b212d;
+  --bg: #0b0d11;
+  --panel: #0f1218;
+  --panel2: #0c1016;
+  --text: #e6e9ef;
+  --muted: #9aa4b2;
+  --good: #49d27d;
+  --bad: #ff6475;
+  --ticker-duration: 45s;
+}
+
+* {
+  box-sizing: border-box;
+}
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial,
+    "Apple Color Emoji", "Segoe UI Emoji";
+  margin: 0;
+  color: var(--text);
+  background: var(--bg);
+}
+
+.homepage {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 1100px;
+  min-height: 100svh;
+  margin: 0 auto;
+  padding: 24px;
+  gap: 24px;
+}
+
+.title {
+  font-family: "Bitcount Grid Double Ink", system-ui, -apple-system, Segoe UI,
+    Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  font-size: clamp(48px, 10vw, 128px);
+  font-weight: 800;
+  line-height: 1.05;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  letter-spacing: 10px;
+  font-variation-settings: "wght" 800;
+}
+
+.ticker {
+  overflow: hidden;
+  width: min(100%, 1100px);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: linear-gradient(0deg, var(--panel), var(--panel2));
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+}
+
+.ticker__track {
+  display: inline-flex;
+  align-items: stretch;
+  animation: ticker var(--ticker-duration) linear infinite;
+  white-space: nowrap;
+  gap: 0;
+  will-change: transform;
+}
+
+.ticker:hover .ticker__track {
+  animation-play-state: paused;
+}
+
+.ticker__item {
+  display: inline-flex;
+  align-items: center;
+  padding: 16px 24px;
+  border-right: 1px solid var(--border);
+  gap: 12px;
+}
+
+.ticker__label {
+  font-size: 15px;
+  color: var(--muted);
+}
+
+.ticker__stat {
+  font-size: 14px;
+  font-weight: 800;
+  line-height: 1;
+  padding: 6px 12px;
+  border: 1px solid transparent;
+  border-radius: 999px;
+}
+
+.ticker__stat--yes,
+.ticker__stat--good {
+  color: var(--good);
+  border-color: rgba(73, 210, 125, 0.25);
+  background: rgba(73, 210, 125, 0.1);
+}
+
+.ticker__stat--no,
+.ticker__stat--bad {
+  color: var(--bad);
+  border-color: rgba(255, 100, 117, 0.25);
+  background: rgba(255, 100, 117, 0.1);
+}
+
+@keyframes ticker {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ticker__track {
+    animation: none;
+  }
+}
