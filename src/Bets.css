@@ -1,0 +1,215 @@
+:root {
+  --border: #1b212d;
+  --bg: #0b0d11;
+  --panel: #0f1218;
+  --panel2: #0c1016;
+  --text: #e6e9ef;
+  --muted: #9aa4b2;
+  --good: #49d27d;
+  --bad: #ff6475;
+  --accent: #4da3ff;
+  --lock: #b3bac6;
+  --lock-active: #84c5ff;
+}
+
+* {
+  box-sizing: border-box;
+}
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial,
+    "Apple Color Emoji", "Segoe UI Emoji";
+  margin: 0;
+  color: var(--text);
+  background: var(--bg);
+}
+
+.bets-page {
+  display: flex;
+  flex-direction: column;
+  max-width: 1200px;
+  min-height: 100svh;
+  margin: 0 auto;
+  padding: 32px 20px 48px;
+  gap: 24px;
+}
+
+.bets-title {
+  font-family: "Bitcount Grid Double Ink", system-ui, -apple-system, Segoe UI,
+    Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  font-size: clamp(32px, 5vw, 56px);
+  font-weight: 800;
+  line-height: 1.08;
+  margin: 0;
+  text-align: center;
+  letter-spacing: 2px;
+  font-variation-settings: "wght" 800;
+}
+
+.bets-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.bet-card {
+  display: grid;
+  padding: 14px;
+  transition: transform 140ms ease, box-shadow 140ms ease,
+    border-color 140ms ease;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: linear-gradient(0deg, var(--panel), var(--panel2));
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+  grid-template-rows: auto 1fr auto;
+  gap: 12px;
+}
+
+.bet-card:hover {
+  transform: translateY(-2px);
+  border-color: #2a3240;
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.32);
+}
+
+.bet-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.bet-category {
+  font-size: 12px;
+  padding: 4px 8px;
+  color: var(--muted);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.bet-body {
+  display: block;
+}
+.bet-title {
+  font-size: 16px;
+  line-height: 1.35;
+  margin: 0;
+}
+
+.bet-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 2px;
+  gap: 8px;
+}
+
+.bet-choice {
+  font-size: 13px;
+  font-weight: 800;
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 12px;
+  cursor: pointer;
+  user-select: none;
+  transition: transform 120ms ease, box-shadow 120ms ease,
+    background-color 120ms ease, border-color 120ms ease, opacity 120ms ease;
+  color: var(--text);
+  border: 1px solid transparent;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.02);
+  appearance: none;
+  -webkit-appearance: none;
+  gap: 8px;
+}
+.bet-choice:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--panel2), 0 0 0 4px var(--accent);
+}
+.bet-choice:active {
+  transform: translateY(0);
+}
+.bet-choice:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.bet-choice--yes {
+  color: var(--good);
+  border-color: rgba(73, 210, 125, 0.25);
+  background: rgba(73, 210, 125, 0.1);
+}
+.bet-choice--yes:hover {
+  border-color: rgba(73, 210, 125, 0.45);
+  background: rgba(73, 210, 125, 0.18);
+}
+
+.bet-choice--no {
+  color: var(--bad);
+  border-color: rgba(255, 100, 117, 0.25);
+  background: rgba(255, 100, 117, 0.1);
+}
+.bet-choice--no:hover {
+  border-color: rgba(255, 100, 117, 0.45);
+  background: rgba(255, 100, 117, 0.18);
+}
+
+.is-leader.bet-choice--yes {
+  box-shadow: 0 0 0 1px rgba(73, 210, 125, 0.35) inset;
+}
+.is-leader.bet-choice--no {
+  box-shadow: 0 0 0 1px rgba(255, 100, 117, 0.35) inset;
+}
+
+.is-selected.bet-choice--yes {
+  border-color: rgba(73, 210, 125, 0.65);
+  background: rgba(73, 210, 125, 0.28);
+  box-shadow: 0 0 0 2px rgba(73, 210, 125, 0.35) inset;
+}
+.is-selected.bet-choice--no {
+  border-color: rgba(255, 100, 117, 0.65);
+  background: rgba(255, 100, 117, 0.28);
+  box-shadow: 0 0 0 2px rgba(255, 100, 117, 0.35) inset;
+}
+
+.bet-choice .bet-pct {
+  font-weight: 900;
+}
+
+.bet-lock {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  cursor: pointer;
+  transition: transform 120ms ease, box-shadow 120ms ease,
+    background-color 120ms ease, border-color 120ms ease, color 120ms ease,
+    opacity 120ms ease;
+  color: var(--lock);
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.03);
+  appearance: none;
+  -webkit-appearance: none;
+}
+.bet-lock:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+.bet-lock:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--panel2), 0 0 0 4px var(--accent);
+}
+.bet-lock:disabled {
+  cursor: not-allowed;
+  opacity: 0.65;
+}
+
+.bet-lock--locked {
+  color: var(--lock-active);
+  border-color: color-mix(in oklab, var(--lock-active) 70%, black 30%);
+  background: rgba(77, 163, 255, 0.12);
+}
